@@ -4,7 +4,7 @@ import sgMail from "@sendgrid/mail";
 
 import {SENDGRID_API_KEY} from "./api";
 
-sgMail.setApiKey(SENDGRID_API_KEY);
+
 
 type Coupon = {
   email: string;
@@ -13,6 +13,9 @@ type Coupon = {
 };
 
 export default function HomePageClient() {
+
+  sgMail.setApiKey(SENDGRID_API_KEY);
+
   const [email, setEmail] = useState("");
   const [discount, setDiscount] = useState("");
   const [coupons, setCoupons] = useState<Coupon[]>(
@@ -32,7 +35,7 @@ export default function HomePageClient() {
     setCoupons(updatedCoupons);
     localStorage.setItem("cupons", JSON.stringify(updatedCoupons));
 
-    const msg = {
+   const msg = {
       to: email,
       from: "fantasmano423@gmail.com",
       subject: "Cupon de descuento",
